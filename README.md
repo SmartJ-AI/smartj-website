@@ -1,3 +1,4 @@
+<img width="1024" height="506" alt="image" src="https://github.com/user-attachments/assets/0689498b-2c7e-4ced-9499-577d5b6aed8b" />
 # ذكاء الجوهرة | SmartJ AI 💎
 
 بوابة الحلول التقنية المتقدمة في سوق التسويق الرقمي السعودي.
