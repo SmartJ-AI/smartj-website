@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart J | ذكاء الجوهرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --main-purple: #8e2cf1; 
+            --bg-color: #f8f9fa;
+        }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-color); 
+            color: #333; 
+        }
+        header { 
+            background: white; 
+            padding: 20px; 
+            text-align: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        }
+        header h1 { 
+            margin: 0; 
+            color: var(--main-purple); 
+            font-size: 28px; 
+        }
+        .hero { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: white; 
+            margin-bottom: 20px; 
+        }
+        .hero h2 { 
+            color: var(--main-purple); 
+            font-size: 32px; 
+            margin-bottom: 15px; 
+        }
+        .hero p { 
+            font-size: 18px; 
+            color: #555; 
+            max-width: 700px; 
+            margin: 0 auto 30px; 
+            line-height: 1.8; 
+        }
+        .cta-btn { 
+            background: var(--main-purple); 
+            color: white; 
+            padding: 15px 40px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            display: inline-block; 
+            transition: 0.3s; 
+            border: none;
+            cursor: pointer;
+        }
+        .cta-btn:hover { 
+            background: #7622ce; 
+            transform: translateY(-2px);
+        }
+        .content-section { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+        }
+        .content-section h3 { 
+            color: var(--main-purple); 
+            text-align: center; 
+            font-size: 24px;
+            margin-bottom: 25px; 
+        }
+        .content-section ul { 
+            list-style: none; 
+            padding: 0; 
+            line-height: 2; 
+            font-size: 16px;
+        }
+        .content-section li::before { 
+            content: "💎"; 
+            margin-left: 10px; 
+        }
+        .pricing-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+            margin-top: 40px; 
+        }
+        .pricing-card { 
+            border: 2px solid var(--main-purple); 
+            padding: 30px; 
+            border-radius: 12px; 
+            text-align: center; 
+            background: white; 
+            flex: 1;
+            min-width: 250px; 
+        }
+        .pricing-card h4 { 
+            margin: 0 0 15px; 
+            font-size: 20px; 
+        }
+        .pricing-card .price { 
+            font-size: 32px; 
+            font-weight: bold; 
+            color: var(--main-purple); 
+            margin-bottom: 20px; 
+        }
+        /* كود التجاوب مع شاشات الجوال */
+        @media (max-width: 600px) {
+            .hero h2 { font-size: 26px; }
+            .pricing-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Smart J</h1>
+    </header>
+
+    <section class="hero">
+        <h2>مستشارتك التسويقية</h2>
+        <p>أنا منبع الحلول التقنية في سوق التسويق الرقمي السعودي. ذكاء الجوهرة مو مجرد ذكاء اصطناعي وبس، هي كيان تقني انولد من قلب المملكة العظيمة عشان تقود التحول الرقمي في التسويق.</p>
+        <a href="#pricing" class="cta-btn">ابدأ رحلة النجاح</a>
+    </section>
+
+    <section class="content-section">
+        <h3>ليش الجوهرة بالذات؟</h3>
+        <ul>
+            <li>نحلل بيانات متجرك ونبني خطط تسويقية ترفع الـ ROAS.</li>
+            <li>تواصل مستمر ومتابعة لنتائج الحملات لحظة بلحظة.</li>
+            <li>استراتيجيات مبنية على فهم عميق لسلوك المستهلك المحلي.</li>
+            <li>بدون إعلانات مزعجة، شغل نظيف ومرتب يخدم علامتك التجارية.</li>
+        </ul>
+
+        <div class="pricing-container" id="pricing">
+            <div class="pricing-card">
+                <h4>الاشتراك الأسبوعي</h4>
+                <div class="price">7.99 ريال</div>
+                <p>تواصل مع الجوهرة بلا حدود.</p>
+                <a href="#" class="cta-btn">اشترك الآن</a>
+            </div>
+            <div class="pricing-card">
+                <h4>الاشتراك الشهري</h4>
+                <div class="price">29.99 ريال</div>
+                <p>تحليل وتقارير مخصصة لمتجرك.</p>
+                <a href="#" class="cta-btn">اشترك الآن</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
