@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جاري الربط مع سلة - ذكاء الجوهرة</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px; font-family: sans-serif;">
+        <h2>ذكاء الجوهرة</h2>
+        <p>جاري تحويلك إلى منصة سلة لإتمام عملية الربط...</p>
+    </div>
+
+    <script>
+        // بيانات تطبيقك
+        const clientId = 'fca00db5-b78f-4abf-94a8-880fcaea6005';
+        const redirectUri = 'https://smartjh1.com/salla-app/callback.html';
+        const scope = 'offline_access read_orders read_customers';
+        
+        // بناء رابط التصريح
+        const authUrl = `https://accounts.salla.sa/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+        
+        // التحويل التلقائي
+        setTimeout(() => {
+            window.location.href = authUrl;
+        }, 1000);
+    </script>
+</body>
+</html>
