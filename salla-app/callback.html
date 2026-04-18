@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تم الربط بنجاح - ذكاء الجوهرة</title>
+</head>
+<body style="text-align: center; font-family: sans-serif; padding-top: 50px;">
+    <h2>💎 ذكاء الجوهرة</h2>
+    <h3 style="color: green;">تم الاتصال بسلة بنجاح!</h3>
+    <p>جاري استخراج مفتاح الوصول (Access Token)...</p>
+    
+    <div id="result" style="background: #f4f4f4; padding: 20px; display: inline-block; border-radius: 10px;">
+        جاري فحص الرمز...
+    </div>
+
+    <script>
+        // كود بسيط لعرض الرمز القادم من سلة في الصفحة
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code) {
+            document.getElementById('result').innerHTML = `<strong>تم استلام الرمز بنجاح:</strong> <br><code style="color: blue;">${code}</code>`;
+        } else {
+            document.getElementById('result').innerHTML = "لم يتم العثور على رمز الاستجابة، تأكد من الدخول عبر سلة.";
+        }
+    </script>
+</body>
+</html>
