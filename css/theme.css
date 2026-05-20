@@ -1,0 +1,31 @@
+:root {
+
+  /* Primary */
+  --primary: #2e0c7d;
+  --secondary: #8e2cf1;
+
+  /* Accent */
+  --orange: #ef860d;
+  --gold: #f4bd38;
+
+  /* Background */
+  --background: #ffffff;
+  --light-bg: #f8f9fa;
+
+  /* Text */
+  --text-primary: #000000;
+  --text-secondary: #808080;
+  --text-tertiary: rgba(128,128,128,0.6);
+
+  /* Border */
+  --border: rgba(128,128,128,0.2);
+
+  /* Shadow */
+  --card-shadow: 0 10px 30px rgba(142, 44, 241, 0.08);
+
+  /* Radius */
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+
+}
