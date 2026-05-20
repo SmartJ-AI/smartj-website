@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>وصف المنتجات</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #f8f9fa;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      background: #2e0c7d;
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .types {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .type-card {
+      background: white;
+      border: 2px solid transparent;
+      padding: 18px;
+      border-radius: 18px;
+      cursor: pointer;
+      flex: 1;
+      min-width: 200px;
+      transition: 0.3s;
+    }
+
+    .type-card.active {
+      border-color: #f4bd38;
+      background: #fff9e8;
+    }
+
+    .type-title {
+      color: #2e0c7d;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .type-sub {
+      color: gray;
+      font-size: 14px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 160px;
+      border: none;
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 16px;
+      font-family: Cairo;
+      resize: none;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      background: #2e0c7d;
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: Cairo;
+    }
+
+    .result {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      margin-top: 30px;
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    وصف المنتجات
+  </div>
+
+  <div class="types">
+
+    <div class="type-card" onclick="toggleType(this, 'فصحى')">
+
+      <div class="type-title">
+        وصف باللغة الفصحى
+      </div>
+
+      <div class="type-sub">
+        وصف احترافي بلغة عربية فصيحة
+      </div>
+
+    </div>
+
+    <div class="type-card" onclick="toggleType(this, 'عامية')">
+
+      <div class="type-title">
+        وصف باللهجة العامية
+      </div>
+
+      <div class="type-sub">
+        وصف بأسلوب عفوي وجذاب
+      </div>
+
+    </div>
+
+    <div class="type-card" onclick="toggleType(this, 'SEO')">
+
+      <div class="type-title">
+        وصف متوافق مع SEO
+      </div>
+
+      <div class="type-sub">
+        وصف محسّن لمحركات البحث
+      </div>
+
+    </div>
+
+  </div>
+
+  <textarea
+    id="productInput"
+    placeholder="اكتب تفاصيل المنتج هنا..."
+  ></textarea>
+
+  <button onclick="generateDescription()">
+    إنشاء الوصف
+  </button>
+
+  <div class="result" id="resultBox" style="display:none;"></div>
+
+</div>
+
+<script>
+
+let selectedTypes = [];
+
+function toggleType(element, type) {
+
+  element.classList.toggle("active");
+
+  if (selectedTypes.includes(type)) {
+
+    selectedTypes = selectedTypes.filter(t => t !== type);
+
+  } else {
+
+    selectedTypes.push(type);
+
+  }
+
+}
+
+async function generateDescription() {
+
+  const input = document.getElementById("productInput").value;
+
+  const resultBox = document.getElementById("resultBox");
+
+  if (!input || selectedTypes.length === 0) return;
+
+  resultBox.style.display = "block";
+
+  resultBox.innerText = "⏳ جاري كتابة الوصف...";
+
+  const prompt = `
+اكتب وصف منتج احترافي بناءً على الأنواع التالية:
+${selectedTypes.join(" - ")}
+
+تفاصيل المنتج:
+${input}
+`;
+
+  try {
+
+    const response = await fetch(
+      "https://api.smartjh1.com/ask",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          message: prompt,
+          user_id: "web-user"
+        })
+
+      }
+    );
+
+    const data = await response.json();
+
+    resultBox.innerText = data.reply || "ما فيه رد";
+
+  } catch (error) {
+
+    resultBox.innerText = "❌ صار خطأ بالاتصال";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
