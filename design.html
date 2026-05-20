@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>صممي لي</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: #2e0c7d;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .welcome-circle {
+      width: 90px;
+      height: 90px;
+      background: #2e0c7d;
+      border-radius: 50%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 16px;
+      border-radius: 18px;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .user {
+      background: #8e2cf1;
+      color: white;
+      margin-right: auto;
+    }
+
+    .bot {
+      background: white;
+      border: 1px solid #eee;
+    }
+
+    .design-image {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 18px;
+      margin-top: 15px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #eee;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      font-family: Cairo;
+    }
+
+    button {
+      background: #2e0c7d;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: Cairo;
+      font-weight: bold;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    صممي لي
+  </div>
+
+  <div class="chat-box" id="chatBox">
+
+    <div class="welcome">
+
+      <div class="welcome-circle">
+        🎨
+      </div>
+
+      <h2>
+        يا مرحبا والله
+      </h2>
+
+      <p>
+        اكتب بالضبط وش تبي أصمم لك ✨
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="input-area">
+
+    <input
+      type="text"
+      id="messageInput"
+      placeholder="اكتب فكرتك هنا..."
+    >
+
+    <button onclick="sendMessage()">
+      تصميم
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+async function sendMessage() {
+
+  const input = document.getElementById("messageInput");
+  const chatBox = document.getElementById("chatBox");
+
+  const message = input.value;
+
+  if (!message) return;
+
+  const userDiv = document.createElement("div");
+
+  userDiv.className = "message user";
+  userDiv.innerText = message;
+
+  chatBox.appendChild(userDiv);
+
+  input.value = "";
+
+  const loadingDiv = document.createElement("div");
+
+  loadingDiv.className = "message bot";
+  loadingDiv.innerText = "🎨 جاري تصميم المحتوى...";
+
+  chatBox.appendChild(loadingDiv);
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+
+    const response = await fetch(
+      "https://api.smartjh1.com/generate-design",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          prompt: message,
+          business_type: "متجر",
+          platform: "Instagram"
+        })
+
+      }
+    );
+
+    const data = await response.json();
+
+    if (!data.success) {
+
+      loadingDiv.innerText = "❌ فشل إنشاء التصميم";
+
+      return;
+    }
+
+    loadingDiv.innerText = "⏳ جاري تجهيز التصميم النهائي...";
+
+    checkStatus(data.taskId, loadingDiv);
+
+  } catch (error) {
+
+    loadingDiv.innerText = "❌ صار خطأ بالاتصال";
+
+  }
+
+}
+
+async function checkStatus(taskId, loadingDiv) {
+
+  try {
+
+    const response = await fetch(
+      `https://api.smartjh1.com/design-status?taskId=${taskId}`
+    );
+
+    const data = await response.json();
+
+    if (data.status === "completed") {
+
+      loadingDiv.innerHTML = `
+        ✅ تم إنشاء التصميم
+        <br><br>
+        <img
+          src="${data.image_url}"
+          class="design-image"
+        >
+      `;
+
+    } else {
+
+      setTimeout(() => {
+        checkStatus(taskId, loadingDiv);
+      }, 2000);
+
+    }
+
+  } catch (error) {
+
+    loadingDiv.innerText = "❌ فشل تحميل التصميم";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
