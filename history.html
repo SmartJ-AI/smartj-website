@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>السجل</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  background: linear-gradient(
+    90deg,
+    #2e0c7d,
+    #8e2cf1
+  );
+  color: white;
+  padding: 30px;
+  border-radius: 24px;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 34px;
+}
+
+.header p {
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+.history-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.type {
+  background: rgba(46,12,125,0.08);
+  color: #2e0c7d;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.date {
+  color: gray;
+  font-size: 14px;
+}
+
+.content {
+  color: #111;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: gray;
+}
+
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  color: #2e0c7d;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>
+السجل
+</h1>
+
+<p>
+آخر المحادثات والتحليلات والتصاميم
+</p>
+
+</div>
+
+<div
+class="loading"
+id="loading"
+>
+
+جاري تحميل السجل...
+
+</div>
+
+<div
+class="history-grid"
+id="historyGrid"
+style="display:none;"
+>
+
+</div>
+
+<div
+class="empty"
+id="emptyState"
+style="display:none;"
+>
+
+<div class="empty-icon">
+🕘
+</div>
+
+<div>
+لا يوجد سجل بعد
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const historyGrid =
+  document.getElementById("historyGrid");
+
+const loading =
+  document.getElementById("loading");
+
+const emptyState =
+  document.getElementById("emptyState");
+
+// 🔥 بيانات تجريبية مؤقتة
+const historyItems = [
+
+  {
+    type: "شور الجوهرة",
+    date: "اليوم",
+    content:
+`كيف أزيد مبيعات متجري؟`
+  },
+
+  {
+    type: "كتابة الإعلانات",
+    date: "اليوم",
+    content:
+`إعلان احترافي لسماعات بلوتوث`
+  },
+
+  {
+    type: "تحليل متجر",
+    date: "أمس",
+    content:
+`تحليل SEO وتجربة المستخدم`
+  }
+
+];
+
+setTimeout(() => {
+
+  loading.style.display = "none";
+
+  if (historyItems.length === 0) {
+
+    emptyState.style.display = "block";
+
+    return;
+  }
+
+  historyGrid.style.display = "grid";
+
+  historyItems.forEach(item => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "card";
+
+    card.innerHTML = `
+
+      <div class="card-top">
+
+        <div class="type">
+          ${item.type}
+        </div>
+
+        <div class="date">
+          ${item.date}
+        </div>
+
+      </div>
+
+      <div class="content">
+        ${item.content}
+      </div>
+
+    `;
+
+    historyGrid.appendChild(card);
+
+  });
+
+}, 1000);
+
+</script>
+
+</body>
+
+</html>
