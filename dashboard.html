@@ -24,6 +24,7 @@
       max-width: 1400px;
       margin: auto;
       padding: 30px;
+      padding-bottom: 140px;
     }
 
     .topbar {
@@ -55,6 +56,7 @@
       justify-content: center;
       color: white;
       font-size: 28px;
+      text-decoration: none;
     }
 
     .search-box {
@@ -77,6 +79,10 @@
       background: transparent;
     }
 
+    .premium-link {
+      text-decoration: none;
+    }
+
     .premium-card {
       background: #2e0c7d;
       border-radius: 35px;
@@ -89,6 +95,11 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(46,12,125,0.25);
+      transition: 0.3s;
+    }
+
+    .premium-card:hover {
+      transform: translateY(-6px);
     }
 
     .premium-card::before {
@@ -136,6 +147,8 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 18px;
+      position: relative;
+      z-index: 2;
     }
 
     .section-title {
@@ -149,6 +162,10 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
+    }
+
+    .tool-link {
+      text-decoration: none;
     }
 
     .tool-card {
@@ -184,10 +201,59 @@
       font-weight: bold;
     }
 
+    .bottom-nav {
+
+      position: fixed;
+
+      bottom: 20px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background: white;
+
+      width: 90%;
+
+      max-width: 700px;
+
+      padding: 16px;
+
+      border-radius: 24px;
+
+      display: flex;
+
+      justify-content: space-around;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+
+      z-index: 999;
+    }
+
+    .nav-item {
+
+      text-decoration: none;
+
+      color: gray;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      text-align: center;
+    }
+
+    .nav-item.active {
+
+      color: #2e0c7d;
+
+    }
+
     @media (max-width: 768px) {
 
       .container {
         padding: 20px;
+        padding-bottom: 140px;
       }
 
       .topbar {
@@ -227,9 +293,9 @@
         <p>أهلاً بك في Smart J</p>
       </div>
 
-      <div class="profile">
+      <a href="settings.html" class="profile">
         👤
-      </div>
+      </a>
 
     </div>
 
@@ -244,29 +310,36 @@
 
     </div>
 
-    <div class="premium-card">
+    <a
+      href="shoor.html"
+      class="premium-link"
+    >
 
-      <div class="premium-left">
+      <div class="premium-card">
 
-        <div class="premium-tag">
-          PREMIUM
+        <div class="premium-left">
+
+          <div class="premium-tag">
+            PREMIUM
+          </div>
+
+          <div class="premium-title">
+            شور الجوهرة 💎
+          </div>
+
+          <div class="premium-sub">
+            مستشارتك التسويقية الذكية
+          </div>
+
         </div>
 
-        <div class="premium-title">
-          شور الجوهرة 💎
-        </div>
-
-        <div class="premium-sub">
-          مستشارتك التسويقية الذكية
+        <div class="premium-btn">
+          ابدأ الآن
         </div>
 
       </div>
 
-      <a href="chat.html" class="premium-btn">
-        ابدأ الآن
-      </a>
-
-    </div>
+    </a>
 
     <div class="section-title">
       الأدوات الإحترافية
@@ -274,36 +347,123 @@
 
     <div class="tools-grid">
 
-      <a href="ads.html" style="text-decoration:none;">
+      <a
+        href="ads.html"
+        class="tool-link"
+      >
 
-  <div class="tool-card">
+        <div class="tool-card">
 
-    <div class="tool-icon">✍️</div>
+          <div class="tool-icon">
+            ✍️
+          </div>
 
-    <div class="tool-title">
-      كتابة الإعلانات
+          <div class="tool-title">
+            كتابة الإعلانات
+          </div>
+
+        </div>
+
+      </a>
+
+      <a
+        href="design.html"
+        class="tool-link"
+      >
+
+        <div class="tool-card">
+
+          <div class="tool-icon">
+            🎨
+          </div>
+
+          <div class="tool-title">
+            صممي لي
+          </div>
+
+        </div>
+
+      </a>
+
+      <a
+        href="products.html"
+        class="tool-link"
+      >
+
+        <div class="tool-card">
+
+          <div class="tool-icon">
+            🛍️
+          </div>
+
+          <div class="tool-title">
+            وصف المنتجات
+          </div>
+
+        </div>
+
+      </a>
+
+      <a
+        href="analysis.html"
+        class="tool-link"
+      >
+
+        <div class="tool-card">
+
+          <div class="tool-icon">
+            📊
+          </div>
+
+          <div class="tool-title">
+            حلل متجري
+          </div>
+
+        </div>
+
+      </a>
+
     </div>
 
   </div>
 
-</a>
+  <div class="bottom-nav">
 
-      <div class="tool-card">
-        <div class="tool-icon">🎨</div>
-        <div class="tool-title">صممي لي</div>
-      </div>
+    <a
+      href="dashboard.html"
+      class="nav-item active"
+    >
+      🏠
+      <br>
+      الرئيسية
+    </a>
 
-      <div class="tool-card">
-        <div class="tool-icon">🛍️</div>
-        <div class="tool-title">وصف المنتجات</div>
-      </div>
+    <a
+      href="history.html"
+      class="nav-item"
+    >
+      🕘
+      <br>
+      السجل
+    </a>
 
-      <div class="tool-card">
-        <div class="tool-icon">📊</div>
-        <div class="tool-title">حلل متجري</div>
-      </div>
+    <a
+      href="shoor.html"
+      class="nav-item"
+    >
+      💎
+      <br>
+      الجوهرة
+    </a>
 
-    </div>
+    <a
+      href="settings.html"
+      class="nav-item"
+    >
+      ⚙️
+      <br>
+      الإعدادات
+    </a>
 
   </div>
 
