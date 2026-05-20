@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الإعدادات</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  background: linear-gradient(
+    90deg,
+    #2e0c7d,
+    #ef860d
+  );
+  color: white;
+  padding: 25px;
+  border-radius: 24px;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.header p {
+  opacity: 0.8;
+  margin-top: 8px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  color: gray;
+  margin-bottom: 12px;
+  padding-right: 10px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: #fafafa;
+}
+
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(46,12,125,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.title {
+  color: #111;
+  font-weight: bold;
+}
+
+.value {
+  color: gray;
+  font-size: 14px;
+}
+
+.arrow {
+  color: #999;
+}
+
+.premium {
+  background: linear-gradient(
+    90deg,
+    #2e0c7d,
+    #8e2cf1
+  );
+  color: white;
+}
+
+.premium .title,
+.premium .value,
+.premium .arrow {
+  color: white;
+}
+
+.logout {
+  color: orange;
+}
+
+.delete {
+  color: red;
+}
+
+.socials {
+  display: flex;
+  gap: 14px;
+}
+
+.social-btn {
+  flex: 1;
+  padding: 18px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.x-btn {
+  background: black;
+}
+
+.tiktok-btn {
+  background: linear-gradient(
+    90deg,
+    black,
+    purple
+  );
+}
+
+.version {
+  text-align: center;
+  color: gray;
+  margin-top: 30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>
+الإعدادات
+</h1>
+
+<p>
+إدارة حسابك وتفضيلاتك
+</p>
+
+</div>
+
+<div class="section">
+
+<div class="card premium">
+
+<div class="row">
+
+<div class="row-right">
+
+<div class="icon">
+👑
+</div>
+
+<div>
+
+<div class="title">
+احصل على النسخة المميزة
+</div>
+
+<div class="value">
+وصول غير محدود لجميع الأدوات
+</div>
+
+</div>
+
+</div>
+
+<div class="arrow">
+‹
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+الملف الشخصي
+</div>
+
+<div class="card">
+
+<div class="row">
+
+<div class="row-right">
+
+<div class="icon">
+👤
+</div>
+
+<div>
+
+<div class="title">
+الاسم
+</div>
+
+<div class="value" id="userName">
+غير محدد
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="row-right">
+
+<div class="icon">
+✉️
+</div>
+
+<div>
+
+<div class="title">
+البريد الإلكتروني
+</div>
+
+<div class="value" id="userEmail">
+غير محدد
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row" onclick="changePassword()">
+
+<div class="row-right">
+
+<div class="icon">
+🔒
+</div>
+
+<div>
+
+<div class="title">
+تغيير كلمة المرور
+</div>
+
+</div>
+
+</div>
+
+<div class="arrow">
+‹
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+الدعم
+</div>
+
+<div class="card">
+
+<a
+href="privacy.html"
+style="text-decoration:none;"
+>
+
+<div class="row">
+
+<div class="row-right">
+
+<div class="icon">
+🛡️
+</div>
+
+<div class="title">
+سياسة الخصوصية
+</div>
+
+</div>
+
+<div class="arrow">
+‹
+</div>
+
+</div>
+
+</a>
+
+<a
+href="terms.html"
+style="text-decoration:none;"
+>
+
+<div class="row">
+
+<div class="row-right">
+
+<div class="icon">
+📄
+</div>
+
+<div class="title">
+شروط الاستخدام
+</div>
+
+</div>
+
+<div class="arrow">
+‹
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+تابعنا
+</div>
+
+<div class="socials">
+
+<a
+href="https://x.com/smartJawharah1"
+target="_blank"
+class="social-btn x-btn"
+>
+
+X
+
+</a>
+
+<a
+href="https://www.tiktok.com/@smartJawharah1"
+target="_blank"
+class="social-btn tiktok-btn"
+>
+
+TikTok
+
+</a>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="card">
+
+<div
+class="row logout"
+onclick="logout()"
+>
+
+<div class="row-right">
+
+<div class="icon">
+🚪
+</div>
+
+<div class="title">
+تسجيل الخروج
+</div>
+
+</div>
+
+</div>
+
+<div
+class="row delete"
+onclick="deleteAccount()"
+>
+
+<div class="row-right">
+
+<div class="icon">
+🗑️
+</div>
+
+<div class="title">
+حذف الحساب
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="version">
+Smart J v1.3
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+  auth,
+  sendPasswordResetEmail,
+  signOut
+} from "./firebase.js";
+
+const userName =
+  localStorage.getItem("user_name");
+
+const userEmail =
+  localStorage.getItem("user_email");
+
+document.getElementById("userName")
+.innerText =
+  userName || "غير محدد";
+
+document.getElementById("userEmail")
+.innerText =
+  userEmail || "غير محدد";
+
+async function changePassword() {
+
+  if (!userEmail) return;
+
+  try {
+
+    await sendPasswordResetEmail(
+      auth,
+      userEmail
+    );
+
+    alert(
+      "تم إرسال رابط إعادة التعيين"
+    );
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
+
+window.changePassword =
+  changePassword;
+
+async function logout() {
+
+  await signOut(auth);
+
+  localStorage.clear();
+
+  window.location.href =
+    "register.html";
+
+}
+
+window.logout = logout;
+
+async function deleteAccount() {
+
+  const confirmDelete =
+    confirm(
+      "هل أنت متأكد من حذف الحساب؟"
+    );
+
+  if (!confirmDelete) return;
+
+  const uid =
+    localStorage.getItem("firebase_uid");
+
+  try {
+
+    await fetch(
+      "https://smartj-backend-production.up.railway.app/delete-account",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          user_id: uid
+        })
+
+      }
+    );
+
+    localStorage.clear();
+
+    alert("تم حذف الحساب");
+
+    window.location.href =
+      "register.html";
+
+  } catch {
+
+    alert("صار خطأ");
+
+  }
+
+}
+
+window.deleteAccount =
+  deleteAccount;
+
+</script>
+
+</body>
+
+</html>
