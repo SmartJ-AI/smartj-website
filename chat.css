@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #2e0c7d;
+  color: white;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+ 
