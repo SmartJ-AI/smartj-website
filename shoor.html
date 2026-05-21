@@ -320,26 +320,6 @@ function selectRole(role) {
 
 }
 
-  selectedRole = role;
-
-  document.getElementById("chatSection").style.display = "flex";
-
-  const chatBox =
-    document.getElementById("chatBox");
-
-  const welcome = document.createElement("div");
-
-  welcome.className = "message ai";
-
-  welcome.innerText =
-`يا مرحبا ومسهلا
-أنا الجوهرة
-مساعدتك الذكية لنمو مشروعك ✨`;
-
-  chatBox.appendChild(welcome);
-
-}
-
 async function sendMessage() {
 
   const input =
