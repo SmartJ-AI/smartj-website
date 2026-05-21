@@ -30,6 +30,28 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    localStorage.setItem(
+      "firebase_uid",
+      user.uid
+    );
+
+    localStorage.setItem(
+      "user_email",
+      user.email || ""
+    );
+
+  } else {
+
+    localStorage.clear();
+
+  }
+
+});
+
 export {
   auth,
   signInWithEmailAndPassword,
