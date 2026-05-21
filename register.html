@@ -21,6 +21,8 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .card {
@@ -32,28 +34,23 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.06);
     }
 
-    .logo {
-      width: 90px;
-      height: 90px;
-      margin: auto;
-      border-radius: 50%;
-      background: linear-gradient(
-        135deg,
-        #8e2cf1,
-        #f4bd38
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 40px;
-      margin-bottom: 20px;
+    .logo-container {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-img {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
     }
 
     h1 {
       text-align: center;
       color: #2e0c7d;
       margin-bottom: 30px;
+      font-size: 42px;
+      font-weight: 900;
     }
 
     input {
@@ -65,6 +62,13 @@
       font-size: 16px;
       font-family: Cairo;
       box-sizing: border-box;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #8e2cf1;
+      box-shadow: 0 0 0 4px rgba(142,44,241,0.08);
     }
 
     button {
@@ -72,12 +76,22 @@
       padding: 16px;
       border: none;
       border-radius: 16px;
-      background: #2e0c7d;
+      background: linear-gradient(
+        90deg,
+        #2e0c7d,
+        #8e2cf1
+      );
       color: white;
       font-size: 18px;
       font-family: Cairo;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
     }
 
     .reset {
@@ -85,12 +99,14 @@
       margin-top: 16px;
       color: #8e2cf1;
       cursor: pointer;
+      font-weight: bold;
     }
 
     .status {
       margin-top: 20px;
       text-align: center;
       color: red;
+      line-height: 1.8;
     }
 
   </style>
@@ -101,8 +117,14 @@
 
 <div class="card">
 
-  <div class="logo">
-    💎
+  <div class="logo-container">
+
+    <img
+      src="logo.png"
+      alt="Smart J"
+      class="logo-img"
+    >
+
   </div>
 
   <h1>
@@ -175,7 +197,6 @@ async function registerUser() {
 
   try {
 
-    // تسجيل دخول
     const result =
       await signInWithEmailAndPassword(
         auth,
@@ -205,7 +226,6 @@ async function registerUser() {
 
     try {
 
-      // إنشاء حساب
       const result =
         await createUserWithEmailAndPassword(
           auth,
@@ -235,6 +255,7 @@ async function registerUser() {
 
       status.innerText =
         error.message;
+
     }
 
   }
@@ -273,7 +294,7 @@ window.resetPassword = resetPassword;
 
 </script>
 
-  <script>
+<script>
 
 const uid =
   localStorage.getItem("firebase_uid");
@@ -286,6 +307,7 @@ if (uid) {
 }
 
 </script>
-  
+
 </body>
+
 </html>
