@@ -17,6 +17,34 @@ body {
   margin: 0;
   font-family: 'Cairo', sans-serif;
   background: #f8f9fa;
+  transition: 0.3s;
+}
+
+body.dark {
+  background: #0f1117;
+  color: white;
+}
+
+body.dark .card,
+body.dark .bottom-nav,
+body.dark .row {
+  background: #1a1d26;
+  color: white;
+}
+
+body.dark .title,
+body.dark .value,
+body.dark .section-title,
+body.dark .nav-item {
+  color: #eee;
+}
+
+body.dark .row:hover {
+  background: #232734;
+}
+
+body.dark .container {
+  color: white;
 }
 
 .container {
@@ -375,6 +403,49 @@ onclick="changeName()"
 <div class="section">
 
 <div class="section-title">
+المظهر
+</div>
+
+<div class="card">
+
+<div
+class="row"
+onclick="toggleDarkMode()"
+>
+
+<div class="row-right">
+
+<div class="icon">
+🌙
+</div>
+
+<div>
+
+<div class="title">
+الوضع الليلي
+</div>
+
+<div class="value">
+تفعيل أو إلغاء الدارك مود
+</div>
+
+</div>
+
+</div>
+
+<div class="arrow">
+‹
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
 الدعم
 </div>
 
@@ -605,6 +676,40 @@ async function changeName() {
 
 window.changeName =
   changeName;
+
+function toggleDarkMode() {
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+  const isDark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    "dark_mode",
+    isDark
+  );
+
+}
+
+window.toggleDarkMode =
+  toggleDarkMode;
+
+const savedDarkMode =
+  localStorage.getItem(
+    "dark_mode"
+  );
+
+if (savedDarkMode === "true") {
+
+  document.body.classList.add(
+    "dark"
+  );
+
+}
 
 async function changePassword() {
 
