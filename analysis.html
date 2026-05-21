@@ -23,6 +23,7 @@
       max-width: 900px;
       margin: auto;
       padding: 20px;
+      padding-bottom: 140px;
     }
 
     .header {
@@ -121,6 +122,54 @@
       display: none;
     }
 
+    .bottom-nav {
+
+      position: fixed;
+
+      bottom: 20px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background: white;
+
+      width: 90%;
+
+      max-width: 700px;
+
+      padding: 16px;
+
+      border-radius: 24px;
+
+      display: flex;
+
+      justify-content: space-around;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+
+      z-index: 999;
+    }
+
+    .nav-item {
+
+      text-decoration: none;
+
+      color: gray;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      text-align: center;
+    }
+
+    .nav-item.active {
+
+      color: #2e0c7d;
+
+    }
+
   </style>
 
 </head>
@@ -171,6 +220,46 @@
 
 </div>
 
+<div class="bottom-nav">
+
+<a
+href="dashboard.html"
+class="nav-item"
+>
+🏠
+<br>
+الرئيسية
+</a>
+
+<a
+href="history.html"
+class="nav-item"
+>
+🕘
+<br>
+السجل
+</a>
+
+<a
+href="shoor.html"
+class="nav-item"
+>
+💎
+<br>
+الجوهرة
+</a>
+
+<a
+href="settings.html"
+class="nav-item"
+>
+⚙️
+<br>
+الإعدادات
+</a>
+
+</div>
+
 <script>
 
 async function analyzeStore() {
@@ -200,7 +289,11 @@ async function analyzeStore() {
         },
 
         body: JSON.stringify({
-          url: storeInput
+
+          url: storeInput,
+
+          user_id: localStorage.getItem("firebase_uid")
+
         })
 
       }
@@ -221,6 +314,8 @@ async function analyzeStore() {
 }
 
 </script>
+
+<script src="auth-check.js"></script>
 
 </body>
 </html>
