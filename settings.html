@@ -289,7 +289,10 @@ style="text-decoration:none;"
 
 <div class="card">
 
-<div class="row">
+<div
+class="row"
+onclick="changeName()"
+>
 
 <div class="row-right">
 
@@ -309,6 +312,10 @@ style="text-decoration:none;"
 
 </div>
 
+</div>
+
+<div class="arrow">
+‹
 </div>
 
 </div>
@@ -577,6 +584,28 @@ document.getElementById("userEmail")
 .innerText =
   userEmail || "غير محدد";
 
+async function changeName() {
+
+  const newName =
+    prompt("اكتب الاسم الجديد");
+
+  if (!newName) return;
+
+  localStorage.setItem(
+    "user_name",
+    newName
+  );
+
+  document.getElementById("userName")
+  .innerText = newName;
+
+  alert("تم تحديث الاسم");
+
+}
+
+window.changeName =
+  changeName;
+
 async function changePassword() {
 
   if (!userEmail) return;
@@ -667,8 +696,8 @@ window.deleteAccount =
 
 </script>
 
-  <script src="auth-check.js"></script>
-  
+<script src="auth-check.js"></script>
+
 </body>
 
 </html>
