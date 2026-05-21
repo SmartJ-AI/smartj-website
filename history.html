@@ -175,82 +175,101 @@ const loading =
 const emptyState =
   document.getElementById("emptyState");
 
-// 🔥 بيانات تجريبية مؤقتة
-const historyItems = [
+async function loadHistory() {
 
-  {
-    type: "شور الجوهرة",
-    date: "اليوم",
-    content:
-`كيف أزيد مبيعات متجري؟`
-  },
+  try {
 
-  {
-    type: "كتابة الإعلانات",
-    date: "اليوم",
-    content:
-`إعلان احترافي لسماعات بلوتوث`
-  },
+    const userId =
+      localStorage.getItem("firebase_uid");
 
-  {
-    type: "تحليل متجر",
-    date: "أمس",
-    content:
-`تحليل SEO وتجربة المستخدم`
-  }
+    if (!userId) {
 
-];
+      loading.innerText =
+        "لا يوجد مستخدم";
 
-setTimeout(() => {
+      return;
+    }
 
-  loading.style.display = "none";
+    const response = await fetch(
+      `https://smartj-backend-production.up.railway.app/history/${userId}`
+    );
 
-  if (historyItems.length === 0) {
+    const data = await response.json();
 
-    emptyState.style.display = "block";
+    loading.style.display = "none";
 
-    return;
-  }
+    if (
+      !data.messages ||
+      data.messages.length === 0
+    ) {
 
-  historyGrid.style.display = "grid";
+      emptyState.style.display =
+        "block";
 
-  historyItems.forEach(item => {
+      return;
+    }
 
-    const card =
-      document.createElement("div");
+    historyGrid.style.display =
+      "grid";
 
-    card.className = "card";
+    data.messages.reverse().forEach(item => {
 
-    card.innerHTML = `
+      const card =
+        document.createElement("div");
 
-      <div class="card-top">
+      card.className = "card";
 
-        <div class="type">
-          ${item.type}
+      const roleText =
+        item.role === "assistant"
+          ? "شور الجوهرة"
+          : "أنت";
+
+      const date =
+        new Date(
+          item.created_at
+        ).toLocaleString("ar-SA");
+
+      card.innerHTML = `
+
+        <div class="card-top">
+
+          <div class="type">
+            ${roleText}
+          </div>
+
+          <div class="date">
+            ${date}
+          </div>
+
         </div>
 
-        <div class="date">
-          ${item.date}
+        <div class="content">
+          ${item.message}
         </div>
 
-      </div>
+      `;
 
-      <div class="content">
-        ${item.content}
-      </div>
+      historyGrid.appendChild(card);
 
-    `;
+    });
 
-    historyGrid.appendChild(card);
+  } catch (error) {
 
-  });
+    console.error(error);
 
-}, 1000);
+    loading.innerText =
+      "❌ فشل تحميل السجل";
+
+  }
+
+}
+
+loadHistory();
 
 </script>
 
-  <script src="auth-check.js"></script>
-  
+<script src="auth-check.js"></script>
+
 </body>
 
 </html>
