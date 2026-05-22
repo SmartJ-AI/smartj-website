@@ -360,6 +360,14 @@ async function sendMessage() {
 
     const data = await response.json();
 
+if (data.limitReached) {
+
+  loadingDiv.innerText =
+    "وصلت للحد المجاني اليومي 👑 اشترك للحصول على استخدام غير محدود";
+
+  return;
+}
+    
     if (!data.success) {
 
       loadingDiv.innerText = "❌ فشل إنشاء التصميم";
