@@ -348,6 +348,14 @@ async function analyzeStore() {
 
     const data = await response.json();
 
+if (data.limitReached) {
+
+  resultBox.innerText =
+    "👑 وصلت للحد المجاني للتحليل، اشترك للحصول على استخدام غير محدود";
+
+  return;
+}
+    
     resultBox.innerText =
       data.analysis || "ما فيه تحليل";
 
