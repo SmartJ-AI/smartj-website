@@ -340,6 +340,31 @@ class="nav-item"
 
 <script>
 
+<script>
+
+let selectedImage = null;
+
+document
+  .getElementById("imageInput")
+  .addEventListener("change", function (e) {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    selectedImage = file;
+
+    const previewContainer =
+      document.getElementById("imagePreviewContainer");
+
+    previewContainer.innerHTML = `
+      <img
+        src="${URL.createObjectURL(file)}"
+        class="preview-image"
+      >
+    `;
+  });
+  
 async function sendMessage() {
 
   const input = document.getElementById("messageInput");
