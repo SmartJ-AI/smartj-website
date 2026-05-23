@@ -246,19 +246,31 @@ body.dark .tool-card:hover {
 
   </div>
 
-  <div class="input-area">
+ <div class="input-area">
 
+  <label class="upload-btn">
+    🖼️
     <input
-      type="text"
-      id="messageInput"
-      placeholder="اكتب فكرتك هنا..."
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      hidden
     >
+  </label>
 
-    <button onclick="sendMessage()">
-      تصميم
-    </button>
+  <input
+    type="text"
+    id="messageInput"
+    placeholder="اكتب فكرتك هنا..."
+  >
 
-  </div>
+  <button onclick="sendMessage()">
+    تصميم
+  </button>
+
+</div>
+
+<div id="imagePreviewContainer"></div>
 
 </div>
 
