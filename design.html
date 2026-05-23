@@ -383,6 +383,16 @@ async function sendMessage() {
 
   input.value = "";
 
+selectedImage = null;
+
+document.getElementById(
+  "imagePreviewContainer"
+).innerHTML = "";
+
+document.getElementById(
+  "imageInput"
+).value = "";
+  
   const loadingDiv = document.createElement("div");
 
   loadingDiv.className = "message bot";
