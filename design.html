@@ -425,6 +425,9 @@ async function sendMessage() {
 
   const message = input.value;
 
+const isSavingBrandIdentity =
+  message.trim() === "احفظي هويتي";
+  
   if (!message) return;
 
 const userDiv = document.createElement("div");
