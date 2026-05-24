@@ -52,11 +52,22 @@ onAuthStateChanged(auth, (user) => {
 
 });
 
+async function getFirebaseToken() {
+
+  const user = auth.currentUser;
+
+  if (!user) return null;
+
+  return await user.getIdToken();
+
+}
+
 export {
   auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  signOut
+  signOut,
+  getFirebaseToken
 };
