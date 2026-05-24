@@ -372,12 +372,26 @@ async function sendMessage() {
 
   if (!message) return;
 
-  const userDiv = document.createElement("div");
+const userDiv = document.createElement("div");
 
-  userDiv.className = "message user";
-  userDiv.innerText = message;
+userDiv.className = "message user";
 
-  chatBox.appendChild(userDiv);
+userDiv.innerHTML = `
+  ${message}
+  ${
+    selectedImage
+      ? `
+      <br><br>
+      <img
+        src="${URL.createObjectURL(selectedImage)}"
+        class="design-image"
+      >
+    `
+      : ""
+  }
+`;
+
+chatBox.appendChild(userDiv);
 
   input.value = "";
 
