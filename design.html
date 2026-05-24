@@ -281,16 +281,15 @@ body.dark .tool-card:hover {
         يا مرحبا والله
       </h2>
 
-      <p>
+<p>
   🎨 اكتب وش تبي أصمم لك
   <br><br>
-  أو أرسل هوية البراند لحفظها
-  (ألوان، لوقو، ستايل، صورة مرجعية)
+  أو احفظ هوية البراند
   <br><br>
-  مثال:
+  ارفع صورة الشعار أو الهوية
+  ثم اكتب:
   <br>
-  هويتي فاخرة، الألوان ذهبي وأسود،
-  ستايلي مودرن سعودي
+  ✨ احفظي هويتي
 </p>
 
     </div>
@@ -466,6 +465,52 @@ input.value = "";
 
   try {
 
+if (isSavingBrandIdentity) {
+
+  const formData =
+    new FormData();
+
+  formData.append(
+    "user_id",
+    localStorage.getItem(
+      "firebase_uid"
+    )
+  );
+
+  formData.append(
+    "prompt",
+    message
+  );
+
+  if (selectedImage) {
+
+    formData.append(
+      "image",
+      selectedImage
+    );
+
+  }
+
+  const response =
+    await fetch(
+      "https://api.smartjh1.com/save-brand-identity-ai",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+  const data =
+    await response.json();
+
+  loadingDiv.innerText =
+    data.success
+      ? "✅ تم حفظ هويتك بنجاح"
+      : "❌ فشل حفظ الهوية";
+
+  return;
+}
+    
 const formData = new FormData();
 
 formData.append("prompt", message);
