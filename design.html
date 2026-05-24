@@ -392,6 +392,23 @@ document
   </div>
 `;
   });
+
+document.addEventListener("click", function (e) {
+
+  if (e.target.id === "removeImageBtn") {
+
+    selectedImage = null;
+
+    document.getElementById(
+      "imagePreviewContainer"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "imageInput"
+    ).value = "";
+  }
+
+});
   
 async function sendMessage() {
 
