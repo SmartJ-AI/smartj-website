@@ -440,13 +440,37 @@ text-decoration:none;
 
 </div>
   
-<script>
+<script type="module">
 
-function subscribe(plan) {
+import { getFirebaseToken }
+from "./firebase.js";
 
-  alert("اشتغل الزر ✅");
+async function subscribe(plan) {
 
+  try {
+
+    const token =
+      await getFirebaseToken();
+
+    if (token) {
+
+      alert("Firebase شغال ✅");
+
+    } else {
+
+      alert("سجل دخول أول");
+
+    }
+
+  } catch (err) {
+
+    alert("خطأ Firebase");
+
+  }
 }
+
+window.subscribe =
+  subscribe;
 
 </script>
 
