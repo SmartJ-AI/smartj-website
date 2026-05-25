@@ -442,23 +442,82 @@ text-decoration:none;
   
 <script>
 
-function subscribe(plan) {
+<script type="module">
 
-  if (plan === "weekly") {
+import {
+  getFirebaseToken
+} from "./firebase.js";
+
+async function subscribe(plan) {
+
+  try {
+
+    const token =
+      await getFirebaseToken();
+
+    if (!token) {
+
+      alert(
+        "سجل دخول أولاً"
+      );
+
+      return;
+    }
+
+    const response =
+      await fetch(
+        "https://smartj-backend-production.up.railway.app/activate-subscription",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            Authorization:
+              `Bearer ${token}`
+          },
+
+          body: JSON.stringify({
+            plan
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (data.success) {
+
+      alert(
+        "✅ تم تفعيل الاشتراك بنجاح"
+      );
+
+      window.location.href =
+        "index.html";
+
+    } else {
+
+      alert(
+        data.message ||
+        "فشل الاشتراك"
+      );
+
+    }
+
+  } catch (err) {
+
+    console.error(err);
 
     alert(
-      "سيتم ربط اشتراك الأسبوعي قريبًا 🔥"
-    );
-
-  } else {
-
-    alert(
-      "سيتم ربط اشتراك الشهري قريبًا 🔥"
+      "صار خطأ أثناء الاشتراك"
     );
 
   }
-
 }
+
+window.subscribe =
+  subscribe;
 
 </script>
 
