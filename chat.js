@@ -60,9 +60,15 @@ async function sendMessage() {
 
 // Enter Key
 const input =
-document.getElementById(
-  "messageInput"
-);
+document.getElementById("messageInput")
+||
+document.getElementById("productInput")
+||
+document.getElementById("input")
+||
+document.querySelector("textarea")
+||
+document.querySelector("input");
 
 if (input) {
 
