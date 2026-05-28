@@ -218,6 +218,11 @@ async function registerUser() {
       name
     );
 
+await saveDeviceData(
+  result.user.uid,
+  email
+);
+    
     window.location.href =
       "index.html";
 
