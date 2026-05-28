@@ -261,6 +261,45 @@ async function registerUser() {
 
 }
 
+async function saveDeviceData(
+  userId,
+  email
+) {
+
+  try {
+
+    await fetch(
+      "https://api.smartjh1.com/save-device-data",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+
+          user_id: userId,
+          email: email
+        })
+      }
+    );
+
+    console.log(
+      "✅ Device data saved"
+    );
+
+  } catch (error) {
+
+    console.log(
+      "❌ Save device error",
+      error
+    );
+  }
+}
+  
 window.registerUser = registerUser;
 
 async function resetPassword() {
