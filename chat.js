@@ -59,16 +59,24 @@ async function sendMessage() {
 }
 
 // Enter Key
-document
-.getElementById("messageInput")
-.addEventListener(
-  "keydown",
-  function(event) {
-
-    if (event.key === "Enter") {
-
-      event.preventDefault();
-      sendMessage();
-    }
-  }
+const input =
+document.getElementById(
+  "messageInput"
 );
+
+if (input) {
+
+  input.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+  );
+}
