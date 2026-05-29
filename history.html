@@ -246,8 +246,8 @@ async function loadHistory() {
     loading.style.display = "none";
 
     if (
-      !data.messages ||
-      data.messages.length === 0
+  !data.conversations ||
+  data.conversations.length === 0
     ) {
 
       emptyState.style.display =
