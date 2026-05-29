@@ -267,14 +267,12 @@ data.conversations.forEach(item => {
       card.className = "card";
 
       const roleText =
-        item.role === "assistant"
-          ? "شور الجوهرة"
-          : "أنت";
+  "شور الجوهرة";
 
-      const date =
-        new Date(
-          item.created_at
-        ).toLocaleString("ar-SA");
+const date =
+  new Date(
+    item.updated_at
+  ).toLocaleString("ar-SA");
 
       card.innerHTML = `
 
