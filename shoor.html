@@ -341,6 +341,18 @@ let selectedRole = null;
 
 async function loadConversation() {
 
+const shouldOpenHistory =
+  localStorage.getItem(
+    "open_history_chat"
+  );
+
+if (
+  shouldOpenHistory !==
+  "true"
+) {
+  return;
+}
+  
   const conversationId =
     localStorage.getItem(
       "conversation_id"
