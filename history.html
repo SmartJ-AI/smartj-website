@@ -3,29 +3,33 @@
 
 <head>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
 
 <title>السجل</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
+
+*{
+  box-sizing:border-box;
+}
 
 body {
   margin: 0;
   font-family: 'Cairo', sans-serif;
   background: #f8f9fa;
+  transition: .25s;
 }
 
-.user-card {
-
-  border-right:
-    6px solid #2e0c7d;
-
-}
-  
 .container {
   max-width: 1000px;
   margin: auto;
@@ -51,7 +55,7 @@ body {
 
 .header p {
   margin-top: 10px;
-  opacity: 0.85;
+  opacity: .9;
 }
 
 .history-grid {
@@ -63,27 +67,41 @@ body {
   background: white;
   border-radius: 22px;
   padding: 22px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-  transition: 0.3s;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+  transition: .25s;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-4px);
 }
 
+.user-card {
+  border-right:
+    6px solid #2e0c7d;
+}
+
 .card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
 .type {
-  background: rgba(46,12,125,0.08);
+  background:
+    rgba(46,12,125,0.08);
+
   color: #2e0c7d;
+
   padding: 8px 14px;
+
   border-radius: 12px;
+
   font-size: 14px;
+
   font-weight: bold;
 }
 
@@ -96,6 +114,7 @@ body {
   color: #111;
   line-height: 1.9;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .empty {
@@ -116,53 +135,51 @@ body {
   font-weight: bold;
 }
 
-  body.dark {
+/* DARK MODE */
 
+body.dark {
   background: #0f1117;
-
   color: white;
-
 }
 
-body.dark .card,
-body.dark .tool-card,
-body.dark .bottom-nav,
-body.dark .row,
-body.dark .search-box,
-body.dark .message,
-body.dark .input-box,
-body.dark textarea,
-body.dark input {
+body.dark .header {
+  background:
+    linear-gradient(
+      90deg,
+      #22104d,
+      #5c1fb4
+    );
+}
 
+body.dark .card {
   background: #1a1d26 !important;
-
   color: white !important;
-
   border-color: #333 !important;
-
 }
 
-body.dark .title,
-body.dark .value,
-body.dark .section-title,
-body.dark .nav-item,
-body.dark .tool-title,
-body.dark p,
+body.dark .content,
 body.dark h1,
 body.dark h2,
-body.dark h3 {
-
+body.dark h3,
+body.dark p {
   color: #eee !important;
-
 }
 
-body.dark .row:hover,
-body.dark .tool-card:hover {
+body.dark .date {
+  color: #999;
+}
 
+body.dark .type {
+  background:
+    rgba(255,255,255,.08);
+
+  color: #d7c3ff;
+}
+
+body.dark .card:hover {
   background: #232734 !important;
-
 }
-  
+
 </style>
 
 </head>
@@ -171,70 +188,108 @@ body.dark .tool-card:hover {
 
 <div class="container">
 
-<div class="header">
+  <div class="header">
 
-<h1>
-السجل
-</h1>
+    <h1>
+      السجل
+    </h1>
 
-<p>
-آخر المحادثات والتحليلات والتصاميم
-</p>
+    <p>
+      آخر المحادثات والتحليلات والتصاميم
+    </p>
 
-</div>
+  </div>
 
-<div
-class="loading"
-id="loading"
->
+  <div
+    class="loading"
+    id="loading"
+  >
+    جاري تحميل السجل...
+  </div>
 
-جاري تحميل السجل...
+  <div
+    class="history-grid"
+    id="historyGrid"
+    style="display:none;"
+  >
+  </div>
 
-</div>
+  <div
+    class="empty"
+    id="emptyState"
+    style="display:none;"
+  >
 
-<div
-class="history-grid"
-id="historyGrid"
-style="display:none;"
->
+    <div class="empty-icon">
+      🕘
+    </div>
 
-</div>
+    <div>
+      لا يوجد سجل بعد
+    </div>
 
-<div
-class="empty"
-id="emptyState"
-style="display:none;"
->
-
-<div class="empty-icon">
-🕘
-</div>
-
-<div>
-لا يوجد سجل بعد
-</div>
-
-</div>
+  </div>
 
 </div>
 
 <script>
 
 const historyGrid =
-  document.getElementById("historyGrid");
+  document.getElementById(
+    "historyGrid"
+  );
 
 const loading =
-  document.getElementById("loading");
+  document.getElementById(
+    "loading"
+  );
 
 const emptyState =
-  document.getElementById("emptyState");
+  document.getElementById(
+    "emptyState"
+  );
+
+function escapeHTML(text) {
+
+  if (!text) return "";
+
+  const div =
+    document.createElement("div");
+
+  div.innerText = text;
+
+  return div.innerHTML;
+}
+
+function formatDate(dateValue) {
+
+  if (!dateValue)
+    return "بدون تاريخ";
+
+  const date =
+    new Date(dateValue);
+
+  if (
+    isNaN(date.getTime())
+  ) {
+    return "بدون تاريخ";
+  }
+
+  return date.toLocaleString(
+    "ar-SA"
+  );
+}
 
 async function loadHistory() {
 
   try {
 
+    historyGrid.innerHTML = "";
+
     const userId =
-      localStorage.getItem("firebase_uid");
+      localStorage.getItem(
+        "firebase_uid"
+      );
 
     if (!userId) {
 
@@ -244,49 +299,77 @@ async function loadHistory() {
       return;
     }
 
-    const response = await fetch(
-      `https://smartj-backend-production.up.railway.app/history/${userId}`
+    const response =
+      await fetch(
+`https://smartj-backend-production.up.railway.app/history/${userId}`
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        "API ERROR"
+      );
+    }
+
+    const data =
+      await response.json();
+
+    console.log(
+      "History Data:",
+      data
     );
 
-    const data = await response.json();
+    loading.style.display =
+      "none";
 
-    loading.style.display = "none";
+    const items =
+      data.conversations ||
+      data.messages ||
+      [];
 
-const items =
-  data.conversations ||
-  data.messages ||
-  [];
+    if (
+      !items.length
+    ) {
 
-if (items.length === 0) {
+      emptyState.style.display =
+        "block";
 
-  emptyState.style.display =
-    "block";
+      return;
+    }
 
-  return;
-}
+    historyGrid.style.display =
+      "grid";
 
-historyGrid.style.display =
-  "grid";
+    items.forEach(item => {
 
-items.forEach(item => {
-    
       const card =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
-card.className =
-  item.role === "user"
-    ? "card user-card"
-    : "card";
-  
+      card.className =
+        item.role === "user"
+          ? "card user-card"
+          : "card";
+
       const roleText =
-  item.role === "assistant"
-    ? "الجوهرة"
-    : "أنت";
+        item.role ===
+        "assistant"
+          ? "الجوهرة"
+          : "أنت";
 
-const date =
-  new Date(
-    item.updated_at
-  ).toLocaleString("ar-SA");
+      const message =
+        escapeHTML(
+          item.message ||
+          item.reply ||
+          item.title ||
+          "ما فيه محتوى"
+        );
+
+      const date =
+        formatDate(
+          item.updated_at ||
+          item.created_at
+        );
 
       card.innerHTML = `
 
@@ -303,13 +386,33 @@ const date =
         </div>
 
         <div class="content">
-        ${item.message || item.reply || "ما فيه محتوى"}
+          ${message}
         </div>
 
       `;
 
-      historyGrid.appendChild(card);
+      card.addEventListener(
+        "click",
+        () => {
 
+          if (
+            item.conversation_id
+          ) {
+
+            localStorage.setItem(
+              "conversation_id",
+              item.conversation_id
+            );
+
+            window.location.href =
+              "shoor.html";
+          }
+        }
+      );
+
+      historyGrid.appendChild(
+        card
+      );
     });
 
   } catch (error) {
@@ -318,9 +421,7 @@ const date =
 
     loading.innerText =
       "❌ فشل تحميل السجل";
-
   }
-
 }
 
 loadHistory();
@@ -328,9 +429,8 @@ loadHistory();
 </script>
 
 <script src="auth-check.js"></script>
+<script src="theme.js"></script>
 
-  <script src="theme.js"></script>
-  
 </body>
 
 </html>
