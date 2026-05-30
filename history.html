@@ -266,8 +266,11 @@ items.forEach(item => {
       const card =
         document.createElement("div");
 
-      card.className = "card";
-
+card.className =
+  item.role === "user"
+    ? "card user-card"
+    : "card";
+  
       const roleText =
   item.role === "user"
     ? "أنت"
