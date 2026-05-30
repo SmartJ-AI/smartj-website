@@ -269,7 +269,9 @@ items.forEach(item => {
       card.className = "card";
 
       const roleText =
-  "شور الجوهرة";
+  item.role === "user"
+    ? "أنت"
+    : "الجوهرة";
 
 const date =
   new Date(
@@ -291,7 +293,7 @@ const date =
         </div>
 
         <div class="content">
-${item.title || item.message}
+        ${item.message}
         </div>
 
       `;
