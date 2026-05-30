@@ -76,10 +76,20 @@ async function sendMessage() {
         "conversation_id"
       );
 
-    const selectedRole =
-      localStorage.getItem(
-        "shoor_role"
-      ) || "merchant";
+    let selectedRole = null;
+
+// شور الجوهرة فقط
+if (
+  window.location.pathname.includes(
+    "shoor"
+  )
+) {
+
+  selectedRole =
+    localStorage.getItem(
+      "shoor_role"
+    ) || "merchant";
+}
 
     const response =
       await fetch(
