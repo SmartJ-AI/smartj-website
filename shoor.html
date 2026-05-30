@@ -397,8 +397,9 @@ async function loadConversation() {
       return;
 
     selectedRole =
-      messages[0]?.role ||
-      "merchant";
+  localStorage.getItem(
+    "shoor_role"
+  ) || "merchant";
 
     messages.forEach(msg => {
 
