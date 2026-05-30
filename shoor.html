@@ -367,43 +367,132 @@ function selectRole(role) {
 
 }
 
-function selectRole(role) {
+```js
+async function sendMessage() {
 
-  selectedRole = role;
-
-  document.querySelector(".hero").style.display =
-    "none";
-
-  document.querySelector(".roles").style.display =
-    "none";
-
-  document.getElementById(
-    "chatSection"
-  ).style.display = "flex";
-
-  document.getElementById(
-    "chatSection"
-  ).style.height = "100vh";
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
 
   const chatBox =
     document.getElementById(
       "chatBox"
     );
 
-  const welcome =
+  const message =
+    input.value.trim();
+
+  if (!message) return;
+
+  const userDiv =
     document.createElement("div");
 
-  welcome.className =
-    "message ai";
+  userDiv.className =
+    "message user";
 
-  welcome.innerText =
-`يا مرحبا ومسهلا
-أنا الجوهرة
-مساعدتك الذكية لنمو مشروعك ✨`;
+  userDiv.innerText =
+    message;
 
   chatBox.appendChild(
-    welcome
+    userDiv
   );
+
+  input.value = "";
+
+  const loadingDiv =
+    document.createElement("div");
+
+  loadingDiv.className =
+    "message ai";
+
+  loadingDiv.innerText =
+    "⏳ جاري التحليل...";
+
+  chatBox.appendChild(
+    loadingDiv
+  );
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+  try {
+
+    const conversationId =
+      localStorage.getItem(
+        "conversation_id"
+      );
+
+    const response =
+      await fetch(
+        "https://smartj-backend-production.up.railway.app/ask",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            message:
+              message,
+
+            user_id:
+              localStorage.getItem(
+                "firebase_uid"
+              ),
+
+            role:
+              selectedRole,
+
+            conversation_id:
+              conversationId
+                ? Number(
+                    conversationId
+                  )
+                : null
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if (
+      data.conversation_id
+    ) {
+
+      localStorage.setItem(
+        "conversation_id",
+        data.conversation_id
+      );
+    }
+
+    if (
+      data.limitReached
+    ) {
+
+      loadingDiv.innerText =
+        "✨ وصلت للحد المجاني اليومي";
+
+      return;
+    }
+
+    loadingDiv.innerText =
+      data.reply ||
+      "ما فيه رد";
+
+    chatBox.scrollTop =
+      chatBox.scrollHeight;
+
+  } catch (error) {
+
+    loadingDiv.innerText =
+      "❌ صار خطأ بالاتصال";
+
+  }
 
 }
   
