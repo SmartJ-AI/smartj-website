@@ -543,18 +543,8 @@ async function sendMessage() {
             message:
               message,
 
-            const firebaseUid =
-  localStorage.getItem(
-    "firebase_uid"
-  );
-
-if (!firebaseUid) {
-
-  loadingDiv.innerText =
-    "❌ لم يتم العثور على المستخدم";
-
-  return;
-}
+            user_id:
+  firebaseUid,
 
             role:
               selectedRole,
