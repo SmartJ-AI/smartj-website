@@ -279,9 +279,9 @@ card.className =
     : "card";
   
       const roleText =
-  item.role === "user"
-    ? "أنت"
-    : "الجوهرة";
+  item.role === "assistant"
+    ? "الجوهرة"
+    : "أنت";
 
 const date =
   new Date(
@@ -303,7 +303,7 @@ const date =
         </div>
 
         <div class="content">
-        ${item.message}
+        ${item.message || item.reply || "ما فيه محتوى"}
         </div>
 
       `;
