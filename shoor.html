@@ -530,10 +530,18 @@ async function sendMessage() {
             message:
               message,
 
-            user_id:
+            const firebaseUid =
   localStorage.getItem(
     "firebase_uid"
-  ) || "web-user",
+  );
+
+if (!firebaseUid) {
+
+  loadingDiv.innerText =
+    "❌ لم يتم العثور على المستخدم";
+
+  return;
+}
 
             role:
               selectedRole,
