@@ -339,6 +339,98 @@ body.dark .tool-card:hover {
 
 let selectedRole = null;
 
+async function loadConversation() {
+
+  const conversationId =
+    localStorage.getItem(
+      "conversation_id"
+    );
+
+  if (!conversationId)
+    return;
+
+  try {
+
+    document.querySelector(
+      ".hero"
+    ).style.display =
+      "none";
+
+    document.querySelector(
+      ".roles"
+    ).style.display =
+      "none";
+
+    const chatSection =
+      document.getElementById(
+        "chatSection"
+      );
+
+    chatSection.style.display =
+      "flex";
+
+    chatSection.style.height =
+      "100vh";
+
+    const chatBox =
+      document.getElementById(
+        "chatBox"
+      );
+
+    const response =
+      await fetch(
+`https://smartj-backend-production.up.railway.app/conversation/${conversationId}`
+      );
+
+    const data =
+      await response.json();
+
+    console.log(
+      "Conversation:",
+      data
+    );
+
+    const messages =
+      data.messages || [];
+
+    if (!messages.length)
+      return;
+
+    selectedRole =
+      messages[0]?.role ||
+      "merchant";
+
+    messages.forEach(msg => {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        msg.role === "assistant"
+          ? "message ai"
+          : "message user";
+
+      div.innerText =
+        msg.message ||
+        msg.content ||
+        "";
+
+      chatBox.appendChild(
+        div
+      );
+    });
+
+    chatBox.scrollTop =
+      chatBox.scrollHeight;
+
+  } catch (err) {
+
+    console.log(err);
+  }
+}
+  
 function selectRole(role) {
 
   selectedRole = role;
@@ -495,6 +587,8 @@ async function sendMessage() {
 
 }
 
+loadConversation();
+  
 </script>
 
 <script src="auth-check.js"></script>
