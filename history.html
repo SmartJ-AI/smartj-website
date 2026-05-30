@@ -245,21 +245,23 @@ async function loadHistory() {
 
     loading.style.display = "none";
 
-    if (
-  !data.conversations ||
-  data.conversations.length === 0
-    ) {
+const items =
+  data.conversations ||
+  data.messages ||
+  [];
 
-      emptyState.style.display =
-        "block";
+if (items.length === 0) {
 
-      return;
-    }
+  emptyState.style.display =
+    "block";
 
-    historyGrid.style.display =
-      "grid";
+  return;
+}
 
-data.conversations.forEach(item => {
+historyGrid.style.display =
+  "grid";
+
+items.forEach(item => {
     
       const card =
         document.createElement("div");
