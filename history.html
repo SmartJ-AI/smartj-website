@@ -404,6 +404,11 @@ async function loadHistory() {
               item.conversation_id
             );
 
+localStorage.setItem(
+  "open_history_chat",
+  "true"
+);
+            
             window.location.href =
               "shoor.html";
           }
