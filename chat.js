@@ -1,88 +1,190 @@
 async function sendMessage() {
 
-  const input = document.getElementById("messageInput");
-  const chatBox = document.getElementById("chatBox");
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
 
-  const message = input.value;
+  const chatBox =
+    document.getElementById(
+      "chatBox"
+    );
+
+  if (!input || !chatBox)
+    return;
+
+  const message =
+    input.value.trim();
 
   if (!message) return;
 
+  const firebaseUid =
+    localStorage.getItem(
+      "firebase_uid"
+    );
+
+  if (!firebaseUid) {
+
+    alert(
+      "❌ لم يتم العثور على المستخدم"
+    );
+
+    return;
+  }
+
   // رسالة المستخدم
-  const userDiv = document.createElement("div");
+  const userDiv =
+    document.createElement(
+      "div"
+    );
 
-  userDiv.className = "message user";
-  userDiv.innerText = message;
+  userDiv.className =
+    "message user";
 
-  chatBox.appendChild(userDiv);
+  userDiv.innerText =
+    message;
+
+  chatBox.appendChild(
+    userDiv
+  );
 
   input.value = "";
 
   // رسالة انتظار
-  const loadingDiv = document.createElement("div");
+  const loadingDiv =
+    document.createElement(
+      "div"
+    );
 
-  loadingDiv.className = "message bot";
-  loadingDiv.innerText = "الجوهرة تفكر...";
+  loadingDiv.className =
+    "message ai";
 
-  chatBox.appendChild(loadingDiv);
+  loadingDiv.innerText =
+    "⏳ الجوهرة تفكر...";
 
-  chatBox.scrollTop = chatBox.scrollHeight;
+  chatBox.appendChild(
+    loadingDiv
+  );
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
 
   try {
 
-    const response = await fetch("https://api.smartjh1.com/ask", {
+    const conversationId =
+      localStorage.getItem(
+        "conversation_id"
+      );
 
-      method: "POST",
+    const selectedRole =
+      localStorage.getItem(
+        "shoor_role"
+      ) || "merchant";
 
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const response =
+      await fetch(
+        "https://smartj-backend-production.up.railway.app/ask",
+        {
 
-      body: JSON.stringify({
-        message: message,
-        user_id: "web-user"
-      })
+          method: "POST",
 
-    });
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-    const data = await response.json();
+          body: JSON.stringify({
 
-    loadingDiv.innerText = data.reply || "ما فيه رد";
+            message:
+              message,
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+            user_id:
+              firebaseUid,
+
+            role:
+              selectedRole,
+
+            conversation_id:
+              conversationId
+                ? Number(
+                    conversationId
+                  )
+                : null
+          })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    console.log(
+      "Ask response:",
+      data
+    );
+
+    // حفظ conversation_id
+    if (
+      data.conversation_id
+    ) {
+
+      localStorage.setItem(
+        "conversation_id",
+        data.conversation_id
+      );
+    }
+
+    // limit reached
+    if (
+      data.limitReached
+    ) {
+
+      loadingDiv.innerText =
+        "✨ وصلت للحد المجاني اليومي";
+
+      return;
+    }
+
+    loadingDiv.innerText =
+      data.reply ||
+      "ما فيه رد";
+
+    chatBox.scrollTop =
+      chatBox.scrollHeight;
 
   } catch (error) {
 
-    loadingDiv.innerText = "صار خطأ بالاتصال";
+    console.error(error);
 
+    loadingDiv.innerText =
+      "❌ صار خطأ بالاتصال";
   }
-
 }
 
-// Enter Key
-const input =
-document.getElementById("messageInput")
-||
-document.getElementById("productInput")
-||
-document.getElementById("input")
-||
-document.querySelector("textarea")
-||
-document.querySelector("input");
+// Enter key
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-if (input) {
+    const input =
+      document.getElementById(
+        "messageInput"
+      );
 
-  input.addEventListener(
-    "keydown",
-    function(event) {
+    if (!input) return;
 
-      if (
-        event.key === "Enter"
-      ) {
+    input.addEventListener(
+      "keydown",
+      function(event) {
 
-        event.preventDefault();
-        sendMessage();
+        if (
+          event.key === "Enter"
+        ) {
+
+          event.preventDefault();
+
+          sendMessage();
+        }
       }
-    }
-  );
-}
+    );
+  }
+);
