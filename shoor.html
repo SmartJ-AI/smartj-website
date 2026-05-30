@@ -509,13 +509,26 @@ async function sendMessage() {
 
   try {
 
-    const conversationId =
-      localStorage.getItem(
-        "conversation_id"
-      );
+  const conversationId =
+    localStorage.getItem(
+      "conversation_id"
+    );
 
-    const response =
-      await fetch(
+  const firebaseUid =
+    localStorage.getItem(
+      "firebase_uid"
+    );
+
+  if (!firebaseUid) {
+
+    loadingDiv.innerText =
+      "❌ لم يتم العثور على المستخدم";
+
+    return;
+  }
+
+  const response =
+    await fetch(
         "https://smartj-backend-production.up.railway.app/ask",
         {
           method: "POST",
