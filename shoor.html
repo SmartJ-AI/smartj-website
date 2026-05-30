@@ -435,6 +435,11 @@ function selectRole(role) {
 
   selectedRole = role;
 
+localStorage.setItem(
+  "shoor_role",
+  role
+);
+  
   document.querySelector(".hero").style.display = "none";
 
   document.querySelector(".roles").style.display = "none";
