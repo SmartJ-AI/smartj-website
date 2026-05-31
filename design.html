@@ -530,8 +530,17 @@ formData.append(
   localStorage.getItem("firebase_uid")
 );
 
-if (selectedImage) {
-  formData.append("image", selectedImage);
+const imageToSend =
+  isEditingDesign
+    ? lastGeneratedImageBlob
+    : selectedImage;
+
+if (imageToSend) {
+
+  formData.append(
+    "image",
+    imageToSend
+  );
 }
 
 const response = await fetch(
