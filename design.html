@@ -593,13 +593,41 @@ async function checkStatus(taskId, loadingDiv) {
     if (data.status === "completed") {
 
       loadingDiv.innerHTML = `
-        ✅ تم إنشاء التصميم
-        <br><br>
-        <img
-          src="${data.image_url}"
-          class="design-image"
-        >
-      `;
+  ✅ تم إنشاء التصميم
+  <br><br>
+
+  <img
+    src="${data.image_url}"
+    class="design-image"
+  >
+
+  <br><br>
+
+  <button
+    class="edit-design-btn"
+    onclick="enableEditMode()"
+  >
+    ✏️ تعديل التصميم
+  </button>
+`;
+
+fetch(data.image_url)
+  .then(res => res.blob())
+  .then(blob => {
+
+    lastGeneratedImageBlob =
+      new File(
+        [blob],
+        "design.jpg",
+        {
+          type:
+            "image/jpeg"
+        }
+      );
+
+    isEditingDesign =
+      false;
+  });
 
     } else {
 
