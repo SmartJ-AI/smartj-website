@@ -426,8 +426,12 @@ async function sendMessage() {
   const input = document.getElementById("messageInput");
   const chatBox = document.getElementById("chatBox");
 
-  const message = input.value;
+const message = input.value;
 
+if (!isEditingDesign) {
+  lastPrompt = message;
+}
+  
 const isSavingBrandIdentity =
   message.trim() === "احفظي هويتي";
   
