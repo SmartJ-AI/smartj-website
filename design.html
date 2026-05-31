@@ -368,6 +368,10 @@ class="nav-item"
 
 let selectedImage = null;
 
+let isEditingDesign = false;
+let lastGeneratedImageBlob = null;
+let lastPrompt = "";
+  
 document
   .getElementById("imageInput")
   .addEventListener("change", function (e) {
