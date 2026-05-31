@@ -645,6 +645,45 @@ fetch(data.image_url)
 
 }
 
+function enableEditMode() {
+
+  isEditingDesign =
+    true;
+
+  const chatBox =
+    document.getElementById(
+      "chatBox"
+    );
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.className =
+    "message bot";
+
+  div.innerHTML = `
+    ✏️ وضع تعديل التصميم مفعل
+    <br>
+    اكتب وش تبي أعدل بالتصميم
+  `;
+
+  chatBox.appendChild(
+    div
+  );
+
+  document
+    .getElementById(
+      "messageInput"
+    )
+    .placeholder =
+      "وش تبي أعدل بالتصميم؟";
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+}
+  
 </script>
 
 <script src="auth-check.js"></script>
