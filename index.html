@@ -553,7 +553,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="auth-check.js"></script>
 
   <script src="theme.js"></script>
-  
+
+<script>
+async function loadWebAd() {
+  try {
+    const res = await fetch("https://api.smartjh1.com/posts");
+    const data = await res.json();
+
+    const posts = data.posts || [];
+
+    const ad = posts.find(post =>
+      post.platform_target === "web" ||
+      post.platform_target === "both"
+    );
+
+    if (!ad) return;
+
+    document.getElementById("webAdBox").innerHTML = `
+      <a href="${ad.cta_url || '#'}" style="text-decoration:none;">
+        <div style="margin-bottom:30px;border-radius:28px;overflow:hidden;background:white;box-shadow:0 10px 30px rgba(0,0,0,0.06);">
+          <img src="${ad.image_url}" style="width:100%;display:block;border-radius:28px;">
+        </div>
+      </a>
+    `;
+  } catch (error) {
+    console.log("WEB AD ERROR:", error);
+  }
+}
+
+loadWebAd();
+</script>
+     
 </body>
 
 </html>
