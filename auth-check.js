@@ -1,9 +1,8 @@
 const uid =
   localStorage.getItem("firebase_uid");
 
-if (!uid) {
+const uid =
+  localStorage.getItem("firebase_uid");
 
-  window.location.href =
-    "register.html";
-
-}
+// لا تسوي تحويل تلقائي
+// خلي الزائر يتصفح الموقع عادي
