@@ -357,6 +357,27 @@ body.dark .tool-card:hover {
 
 let selectedRole = null;
 
+  let selectedNeeds = [];
+
+const merchantNeeds = [
+  { id:"sales_down", label:"📈 مبيعاتي ضعيفة / نازلة" },
+  { id:"low_reach", label:"🎯 ما يجيني عملاء كفاية" },
+  { id:"no_retention", label:"🔁 عملائي يشترون مرة وما يرجعون" },
+  { id:"launch_campaign", label:"🚀 أبي أطلق حملة أو عرض" },
+  { id:"weak_content", label:"📱 محتواي وحضوري ضعيف" },
+  { id:"full_analysis", label:"📊 حللي نشاطي كامل" },
+  { id:"specific_question", label:"🧠 عندي سؤال أو قرار تسويقي" }
+];
+
+const marketerNeeds = [
+  { id:"ads_performance", label:"📊 حملاتي الإعلانية ما تجيب نتيجة" },
+  { id:"full_strategy", label:"🎯 أبي أبني استراتيجية تسويق كاملة" },
+  { id:"creative_ideas", label:"✍️ أبي محتوى أو أفكار حملات" },
+  { id:"analytics", label:"📈 أبي أحلل أداء وأقرأ أرقام" },
+  { id:"client_pitch", label:"🧑‍💼 عندي عميل وأبي أقنعه" },
+  { id:"specific_question", label:"🧠 عندي سؤال أو قرار تسويقي" }
+];
+
 async function loadConversation() {
 
 const shouldOpenHistory =
