@@ -490,19 +490,63 @@ localStorage.removeItem(
 function selectRole(role) {
 
   selectedRole = role;
+selectedNeeds = [];
 
 localStorage.setItem(
   "shoor_role",
   role
 );
-  
-  document.querySelector(".hero").style.display = "none";
 
-  document.querySelector(".roles").style.display = "none";
+document.querySelector(".hero").style.display = "none";
 
-  document.getElementById("chatSection").style.display = "flex";
+document.querySelector(".roles").style.display = "none";
 
-  document.getElementById("chatSection").style.height = "100vh";
+document.getElementById("needsSection").style.display = "block";
+
+const list =
+  document.getElementById("needsList");
+
+list.innerHTML = "";
+
+const needs =
+  role === "merchant"
+    ? merchantNeeds
+    : marketerNeeds;
+
+  needs.forEach(item => {
+
+  const div = document.createElement("div");
+
+  div.style.background = "white";
+  div.style.padding = "18px";
+  div.style.borderRadius = "18px";
+  div.style.border = "2px solid #eee";
+  div.style.cursor = "pointer";
+
+  div.innerText = item.label;
+
+  div.onclick = () => {
+
+    if (selectedNeeds.includes(item.id)) {
+
+      selectedNeeds =
+        selectedNeeds.filter(x => x !== item.id);
+
+      div.style.border = "2px solid #eee";
+
+    } else {
+
+      selectedNeeds.push(item.id);
+
+      div.style.border = "2px solid #8e2cf1";
+
+    }
+
+  };
+
+  list.appendChild(div);
+
+});
 
   const chatBox =
     document.getElementById("chatBox");
