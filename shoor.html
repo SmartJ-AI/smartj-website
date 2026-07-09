@@ -508,6 +508,9 @@ const list =
 
 list.innerHTML = "";
 
+  console.log("ROLE:", role);
+console.log("NEEDS:", role === "merchant" ? merchantNeeds : marketerNeeds);
+
 const needs =
   role === "merchant"
     ? merchantNeeds
