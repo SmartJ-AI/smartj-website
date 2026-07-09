@@ -678,22 +678,20 @@ async function sendMessage() {
 
           body: JSON.stringify({
 
-            message:
-              message,
+  message: message,
 
-            user_id:
-  firebaseUid,
+  user_id: firebaseUid,
 
-            role:
-              selectedRole,
+  role: selectedRole,
 
-            conversation_id:
-              conversationId
-                ? Number(
-                    conversationId
-                  )
-                : null
-          })
+  identity: selectedRole,
+
+  needs: selectedNeeds,
+
+  conversation_id: conversationId
+    ? Number(conversationId)
+    : null
+})
         }
       );
 
