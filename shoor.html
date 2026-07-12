@@ -708,15 +708,49 @@ async function sendMessage() {
       );
     }
 
-    if (
-      data.limitReached
-    ) {
+    if (data.limitReached) {
 
-      loadingDiv.innerText =
-        "✨ وصلت للحد المجاني اليومي";
+  loadingDiv.innerHTML = `
+    <div style="text-align:center">
 
-      return;
-    }
+      <div style="
+        font-size:20px;
+        font-weight:bold;
+        margin-bottom:10px;
+      ">
+        💎 وصلت للحد المجاني
+      </div>
+
+      <div style="
+        color:#666;
+        margin-bottom:20px;
+        line-height:1.8;
+      ">
+        اشترك الآن واستمتع برسائل غير محدودة مع الجوهرة
+        وجميع الأدوات الاحترافية.
+      </div>
+
+      <button
+        onclick="window.location.href='subscription.html'"
+        style="
+          background:linear-gradient(90deg,#2e0c7d,#8e2cf1);
+          color:#fff;
+          border:none;
+          padding:16px 30px;
+          border-radius:16px;
+          cursor:pointer;
+          font-family:Cairo;
+          font-size:16px;
+          font-weight:bold;
+        ">
+        🚀 اشترك الآن
+      </button>
+
+    </div>
+  `;
+
+  return;
+}
 
     loadingDiv.innerText =
       data.reply ||
