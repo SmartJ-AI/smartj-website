@@ -350,8 +350,46 @@ async function analyzeStore() {
 
 if (data.limitReached) {
 
-  resultBox.innerText =
-    "👑 وصلت للحد المجاني للتحليل، اشترك للحصول على استخدام غير محدود";
+  resultBox.innerHTML = `
+    <div style="text-align:center;padding:20px;">
+
+      <div style="
+        font-size:26px;
+        font-weight:bold;
+        color:#2e0c7d;
+        margin-bottom:15px;
+      ">
+        💎 وصلت للحد المجاني
+      </div>
+
+      <div style="
+        font-size:17px;
+        line-height:2;
+        color:#666;
+        margin-bottom:25px;
+      ">
+        واضح إنك مهتم بتحليل متجرك 👌<br>
+        اشترك الآن وافتح تحليل غير محدود، مع جميع أدوات الجوهرة الاحترافية.
+      </div>
+
+      <button
+        onclick="window.location.href='subscription.html'"
+        style="
+          background:linear-gradient(90deg,#2e0c7d,#8e2cf1);
+          color:#fff;
+          border:none;
+          padding:16px 35px;
+          border-radius:18px;
+          font-family:Cairo;
+          font-size:18px;
+          font-weight:bold;
+          cursor:pointer;
+        ">
+        🚀 اشترك الآن
+      </button>
+
+    </div>
+  `;
 
   return;
 }
