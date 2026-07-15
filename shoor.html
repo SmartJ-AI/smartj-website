@@ -688,7 +688,9 @@ async function sendMessage() {
 
   needs: selectedNeeds,
 
-  conversation_id: conversationId || null
+  conversation_id: conversationId
+  ? Number(conversationId)
+  : null
 })
         }
       );
